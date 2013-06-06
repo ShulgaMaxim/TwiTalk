@@ -40,6 +40,18 @@
                     android:scheme="twitalk" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.ContactsActivity">
+            <intent-filter>
+                <action android:name="ru.usu.intent.action.showcontacts"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="ru.usu.twitalk.activities.MsgsActivity">
+            <intent-filter>
+                <action android:name="ru.usu.intent.action.showmsgs"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,6 +20,8 @@ public class TwiTalkActivity extends Activity {
 
 	private Button btnLogin;
 	private Button btnLogoutTwitter;
+	private Button btnShowFollowers;
+	
 	private TextView lblUserName;
 
 	private OAuthConsumer mConsumer = null;
@@ -32,7 +35,7 @@ public class TwiTalkActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 
 		mConsumer = ((App) getApplication()).getOAuthConsumer();
 
@@ -44,7 +47,10 @@ public class TwiTalkActivity extends Activity {
 
 		btnLogoutTwitter = (Button) findViewById(R.id.btnLogoutTwitter);
 		btnLogoutTwitter.setOnClickListener(new LogoutButtonClickedListener());
-
+		
+		btnShowFollowers = (Button) findViewById(R.id.btnFollowers);
+		btnShowFollowers.setOnClickListener(new FollowerButtonClickedListener());
+		
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
 	}
@@ -61,6 +67,7 @@ public class TwiTalkActivity extends Activity {
 				mConsumer.setTokenWithSecret(mToken, mSecret);
 				btnLogin.setVisibility(View.GONE);
 				btnLogoutTwitter.setVisibility(View.VISIBLE);
+				btnShowFollowers.setVisibility(View.VISIBLE);
 				(new GetCredentialsTask(mConsumer)).execute();
 			}
 		}
@@ -82,10 +89,25 @@ public class TwiTalkActivity extends Activity {
 			App.saveAuthInformation(mSettings, null, null);
 			btnLogin.setVisibility(View.VISIBLE);
 			btnLogoutTwitter.setVisibility(View.GONE);
+			btnShowFollowers.setVisibility(View.GONE);
 			Data.USER_NAME = "user_name";
 			lblUserName.setText(Data.USER_NAME);
 			Data.FOLLOWERS.clear();
+		}
+	}
+	
+	class FollowerButtonClickedListener implements OnClickListener {
 
+		public boolean onCreateOptionsMenu(Menu menu) {
+			// Inflate the menu; this adds items to the action bar if it is present.
+			getMenuInflater().inflate(R.menu.main, menu);
+			return true;
+		}
+
+		@Override
+		public void onClick(View view) {
+			Intent intent = new Intent("ru.usu.intent.action.showcontacts");
+			startActivity(intent);
 		}
 	}
 

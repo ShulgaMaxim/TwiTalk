@@ -5,13 +5,15 @@
     android:orientation="vertical" >
     
     <!-- Twitter Login Button -->
-    <Button android:id="@+id/btnLogin"
+
+    <Button
+        android:id="@+id/btnLogin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Login with Twitter"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:layout_marginTop="30dip"/>
+        android:layout_marginTop="30dip"
+        android:text="@string/login" />
     
     <!-- user name label -->
     <TextView android:id="@+id/lblUserName"
@@ -22,7 +24,7 @@
 
     <!-- label update status -->
     <TextView android:id="@+id/lblUpdate" 
-        android:text="Update Status"
+        android:text="@string/update_status"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dip"
@@ -40,16 +42,26 @@
     <Button android:id="@+id/btnUpdateStatus"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Tweet"
+        android:text="@string/tweet"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
+        android:visibility="gone"/>
+    
+    <!-- Twitter Followers button -->
+    <Button android:id="@+id/btnFollowers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_followers"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="50dip"
         android:visibility="gone"/>
     
     <!-- Twitter Logout button -->
     <Button android:id="@+id/btnLogoutTwitter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Logout from Twitter"
+        android:text="@string/logout"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:layout_marginTop="50dip"
