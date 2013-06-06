@@ -50,7 +50,9 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 
 		if (loggedIn) {
 			Log.d(TAG, "user:" + Data.USER_NAME);
+			Log.d(TAG, "id:" + Data.ID_AUTH_USER);
 //			lblUserName.setText(Data.USER_NAME);
+//			new GetUserTimeLine(mConsumer, Data.ID_AUTH_USER).execute(App.USER_TIMELINE_URL);
 			new GetFollowersList(mConsumer).execute(App.GET_FOLLOWERS_LIST_URL);
 		} else {
 			Log.d(TAG, "beda");
@@ -60,6 +62,7 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 	private void parseVerifyUserJSONObject(JSONObject object) throws Exception {
 
 		Data.USER_NAME = object.getString("name");
+		Data.ID_AUTH_USER = object.getLong("id_str");
 
 	}
 

@@ -82,7 +82,8 @@ public class TwiTalkActivity extends Activity {
 			App.saveAuthInformation(mSettings, null, null);
 			btnLogin.setVisibility(View.VISIBLE);
 			btnLogoutTwitter.setVisibility(View.GONE);
-			Data.USER_NAME = "user_name";
+			Data.USER_NAME = "";
+			Data.ID_AUTH_USER = 0;
 			lblUserName.setText(Data.USER_NAME);
 			Data.FOLLOWERS.clear();
 
