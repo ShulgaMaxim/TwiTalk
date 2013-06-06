@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,6 +20,7 @@ public class TwiTalkActivity extends Activity {
 
 	private Button btnLogin;
 	private Button btnLogoutTwitter;
+	private Button btnShowFriends;
 	private TextView lblUserName;
 
 	private OAuthConsumer mConsumer = null;
@@ -44,6 +46,9 @@ public class TwiTalkActivity extends Activity {
 
 		btnLogoutTwitter = (Button) findViewById(R.id.btnLogoutTwitter);
 		btnLogoutTwitter.setOnClickListener(new LogoutButtonClickedListener());
+		
+		btnShowFriends = (Button) findViewById(R.id.btnFollowers);
+		btnShowFriends.setOnClickListener(new FriendsButtonClickedListener());
 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -60,6 +65,7 @@ public class TwiTalkActivity extends Activity {
 			if (!(mToken == null || mSecret == null)) {
 				mConsumer.setTokenWithSecret(mToken, mSecret);
 				btnLogin.setVisibility(View.GONE);
+				btnShowFriends.setVisibility(View.VISIBLE);
 				btnLogoutTwitter.setVisibility(View.VISIBLE);
 				(new GetCredentialsTask(mConsumer)).execute();
 			}
@@ -81,12 +87,28 @@ public class TwiTalkActivity extends Activity {
 		public void onClick(View v) {
 			App.saveAuthInformation(mSettings, null, null);
 			btnLogin.setVisibility(View.VISIBLE);
+			btnShowFriends.setVisibility(View.GONE);
 			btnLogoutTwitter.setVisibility(View.GONE);
 			Data.USER_NAME = "";
 			Data.ID_AUTH_USER = 0;
 			lblUserName.setText(Data.USER_NAME);
 			Data.FOLLOWERS.clear();
 
+		}
+	}
+	
+	class FriendsButtonClickedListener implements OnClickListener {
+
+		public boolean onCreateOptionsMenu(Menu menu) {
+			// Inflate the menu; this adds items to the action bar if it is present.
+			getMenuInflater().inflate(R.menu.main, menu);
+			return true;
+		}
+
+		@Override
+		public void onClick(View view) {
+			Intent intent = new Intent("ru.usu.intent.action.showcontacts");
+			startActivity(intent);
 		}
 	}
 
