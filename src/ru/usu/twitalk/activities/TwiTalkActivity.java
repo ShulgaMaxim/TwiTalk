@@ -6,6 +6,7 @@ import ru.usu.twitalk.Data;
 import ru.usu.twitalk.R;
 import ru.usu.twitalk.twitter.GetCredentialsTask;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ public class TwiTalkActivity extends Activity {
 	private Button btnLogoutTwitter;
 	private Button btnShowFriends;
 	private TextView lblUserName;
+	
+	public static ProgressDialog pd;
 
 	private OAuthConsumer mConsumer = null;
 
@@ -38,6 +41,7 @@ public class TwiTalkActivity extends Activity {
 
 		mConsumer = ((App) getApplication()).getOAuthConsumer();
 
+		this.
 		lblUserName = (TextView) this.findViewById(R.id.lblUserName);
 		lblUserName.setText(Data.USER_NAME);
 
@@ -67,6 +71,10 @@ public class TwiTalkActivity extends Activity {
 				btnLogin.setVisibility(View.GONE);
 				btnShowFriends.setVisibility(View.VISIBLE);
 				btnLogoutTwitter.setVisibility(View.VISIBLE);
+				pd = new ProgressDialog(this);
+				pd.setTitle("WELCOME");
+				pd.setMessage("Loading contacts...");
+				pd.show();
 				(new GetCredentialsTask(mConsumer)).execute();
 			}
 		}
@@ -111,5 +119,4 @@ public class TwiTalkActivity extends Activity {
 			startActivity(intent);
 		}
 	}
-
 }
