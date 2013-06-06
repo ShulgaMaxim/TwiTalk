@@ -51,7 +51,7 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 		if (loggedIn) {
 			Log.d(TAG, "user:" + Data.USER_NAME);
 //			lblUserName.setText(Data.USER_NAME);
-//			new GetFollowersList().execute(App.GET_FOLLOWERS_LIST_URL);
+			new GetFollowersList(mConsumer).execute(App.GET_FOLLOWERS_LIST_URL);
 		} else {
 			Log.d(TAG, "beda");
 		}
