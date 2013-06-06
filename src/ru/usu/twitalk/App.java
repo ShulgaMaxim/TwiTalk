@@ -16,11 +16,11 @@ public class App extends Application {
 
 	public static final String VERIFY_URL_STRING = "https://api.twitter.com/1.1/account/verify_credentials.json";
 	public static final String PUBLIC_TIMELINE_URL_STRING = "https://api.twitter.com/1.1/statuses/public_timeline.json";
-	public static final String USER_TIMELINE_URL_STRING = "https://api.twitter.com/1.1/statuses/user_timeline.json";
 	public static final String HOME_TIMELINE_URL_STRING = "https://api.twitter.com/1.1/statuses/home_timeline.json";
 	public static final String FRIENDS_TIMELINE_URL_STRING = "https://api.twitter.com/1.1/statuses/friends_timeline.json";
 	public static final String STATUSES_URL_STRING = "https://api.twitter.com/1.1/statuses/update.json";
 	public static final String GET_FOLLOWERS_LIST_URL = "https://api.twitter.com/1.1/followers/list.json";
+	public static final String USER_TIMELINE_URL = "https://api.twitter.com/1.1/statuses/user_timeline.json";
 	
 	public static final String USER_TOKEN = "user_token";
 	public static final String USER_SECRET = "user_secret";
