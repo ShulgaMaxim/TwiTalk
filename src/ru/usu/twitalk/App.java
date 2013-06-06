@@ -20,7 +20,8 @@ public class App extends Application {
 	public static final String HOME_TIMELINE_URL_STRING = "https://api.twitter.com/1.1/statuses/home_timeline.json";
 	public static final String FRIENDS_TIMELINE_URL_STRING = "https://api.twitter.com/1.1/statuses/friends_timeline.json";
 	public static final String STATUSES_URL_STRING = "https://api.twitter.com/1.1/statuses/update.json";
-
+	public static final String GET_FOLLOWERS_LIST_URL = "https://api.twitter.com/1.1/followers/list.json";
+	
 	public static final String USER_TOKEN = "user_token";
 	public static final String USER_SECRET = "user_secret";
 	public static final String REQUEST_TOKEN = "request_token";
@@ -32,7 +33,6 @@ public class App extends Application {
 
 	public static final String CALLBACK_URL = "twitalk://twitt";
 	public static final Uri CALLBACK_URI = Uri.parse(CALLBACK_URL);
-
 
 	public static void saveRequestInformation(SharedPreferences settings,
 			String token, String secret) {

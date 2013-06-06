@@ -36,8 +36,6 @@ public class OAuthActivity extends Activity {
 		mApp = (App) this.getApplication();
 		mProvider = mApp.getOAuthProvider();
 		mConsumer = mApp.getOAuthConsumer();
-		Assert.assertNotNull(mProvider);
-		Assert.assertNotNull(mConsumer);
 
 		mIntent = this.getIntent();
 		if (mIntent.getData() == null) {
@@ -152,6 +150,8 @@ public class OAuthActivity extends Activity {
 				App.saveRequestInformation(mSettings, null, null);
 
 			}
+			/*OAuthActivity.this.startActivity(new Intent(OAuthActivity.this,
+					OAuthActivity.class));*/
 			finish();
 		}
 	}
