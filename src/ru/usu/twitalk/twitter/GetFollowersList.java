@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import ru.usu.twitalk.Data;
+import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -52,6 +53,7 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void nada) {
+		TwiTalkActivity.pd.dismiss();
 		for (String name : Data.FOLLOWERS)
 			Log.d(TAG, name);
 

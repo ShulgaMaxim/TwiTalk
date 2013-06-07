@@ -50,7 +50,6 @@ public class ContactsActivity extends Activity {
 				startActivity(intent);
 				}
 			});
-		
 		}
 	}
 }

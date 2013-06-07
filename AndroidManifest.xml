@@ -40,7 +40,7 @@
                     android:scheme="twitalk" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ContactsActivity">
+        <activity android:name="ru.usu.twitalk.activities.ContactsActivity">
             <intent-filter>
                 <action android:name="ru.usu.intent.action.showcontacts"/>
                 <category android:name="android.intent.category.DEFAULT"/>
