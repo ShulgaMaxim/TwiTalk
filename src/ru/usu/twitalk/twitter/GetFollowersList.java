@@ -26,6 +26,9 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 	
 	@Override
 	protected void onPreExecute() {
+		TwiTalkActivity.progressDialog.setTitle("WELCOME");
+		TwiTalkActivity.progressDialog.setMessage("Loading contacts...");
+		TwiTalkActivity.progressDialog.show();
 		Log.d(TAG, "Waitng");
 	}
 
@@ -53,7 +56,7 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void nada) {
-		TwiTalkActivity.pd.dismiss();
+		TwiTalkActivity.progressDialog.dismiss();
 		for (String name : Data.FOLLOWERS)
 			Log.d(TAG, name);
 
