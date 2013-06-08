@@ -24,7 +24,7 @@ public class TwiTalkActivity extends Activity {
 	private Button btnShowFriends;
 	private TextView lblUserName;
 	
-	public static ProgressDialog pd;
+	public static ProgressDialog progressDialog;
 
 	private OAuthConsumer mConsumer = null;
 
@@ -53,6 +53,8 @@ public class TwiTalkActivity extends Activity {
 		
 		btnShowFriends = (Button) findViewById(R.id.btnFollowers);
 		btnShowFriends.setOnClickListener(new FriendsButtonClickedListener());
+		
+		progressDialog = new ProgressDialog(this);
 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -71,10 +73,6 @@ public class TwiTalkActivity extends Activity {
 				btnLogin.setVisibility(View.GONE);
 				btnShowFriends.setVisibility(View.VISIBLE);
 				btnLogoutTwitter.setVisibility(View.VISIBLE);
-				pd = new ProgressDialog(this);
-				pd.setTitle("WELCOME");
-				pd.setMessage("Loading contacts...");
-				pd.show();
 				(new GetCredentialsTask(mConsumer)).execute();
 			}
 		}
