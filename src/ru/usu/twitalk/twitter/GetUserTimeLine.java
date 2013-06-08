@@ -1,12 +1,17 @@
 package ru.usu.twitalk.twitter;
 
+import java.util.ArrayList;
+
 import oauth.signpost.OAuthConsumer;
 
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import ru.usu.twitalk.Data;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -31,8 +36,8 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 			Uri sUri = Uri.parse(params[0]);
 			Uri.Builder builder = sUri.buildUpon();
 			builder.appendQueryParameter("user_id", String.valueOf(user_id));
-			builder.appendQueryParameter("count", "3");
-			Log.d(TAG,builder.build().toString());
+			builder.appendQueryParameter("count", "2");
+			// Log.d(TAG,builder.build().toString());
 			HttpGet get = new HttpGet(builder.build().toString());
 			mConsumer.sign(get);
 			String response = mClient.execute(get, new BasicResponseHandler());
@@ -47,15 +52,33 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 		return null;
 	}
 
-	private void parseTimelineJSONObject(JSONObject object) throws Exception {
-		JSONObject user = object.getJSONObject("user");
-		JSONArray array = object.getJSONObject("entities").getJSONArray("user_mentions");
-		Log.d(TAG, user.getString("name") + " " + object.getString("text"));
-		for (int i = 0; i < array.length(); ++i) {
-			JSONObject person = array.getJSONObject(i);
-			Log.d(TAG, person.getString("name") + " " + person.getString("screen_name"));
+	private void parseTimelineJSONObject(JSONObject object) {
+		JSONObject user;
+		ArrayList<String> list;
+		try {
+			user = object.getJSONObject("user");
+			String name = user.getString("name");
+			String msg = object.getString("text");
+			if (Data.contactsWithMsgs.containsKey(name)) {
+				list = Data.contactsWithMsgs.get(name);
+			} else {
+				list = new ArrayList<String>();
+			}
+			list.add(msg);
+			Data.contactsWithMsgs.put(name, list);
+			Log.d(TAG, name + " " + msg);
+		} catch (JSONException e) {
+			Log.e(TAG, "Couldn't take user data", e);
+			return;
 		}
+		// JSONArray array =
+		// object.getJSONObject("entities").getJSONArray("user_mentions");
+
+		// for (int i = 0; i < array.length(); ++i) {
+		// JSONObject person = array.getJSONObject(i);
+		// Log.d(TAG, person.getString("name") + " " +
+		// person.getString("screen_name"));
+		// }
 	}
 
 }
-	

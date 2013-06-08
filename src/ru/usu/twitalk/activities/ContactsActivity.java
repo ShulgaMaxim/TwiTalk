@@ -24,20 +24,17 @@ public class ContactsActivity extends Activity {
 		
 		//if (Data.contactsWithMsgs.isEmpty()) {
 		if (Data.FOLLOWERS.isEmpty()) {
-			tvView.setText("У Вас еще нет ни одного контакта");
+			tvView.setText("пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		}
 		else {
 		//Object[] contacts = Data.contactsWithMsgs.keySet().toArray();
 			ArrayList<String> contacts = Data.FOLLOWERS;
 		
-		// находим список
 		ListView lvContacts = (ListView) findViewById(R.id.lvContacts);
 		
-		// создаем адаптер
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
     		R.layout.my_list_item, contacts);
 		
-		// присваиваем адаптер списку
 		lvContacts.setAdapter(adapter);
 		
 		

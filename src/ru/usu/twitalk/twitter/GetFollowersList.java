@@ -8,6 +8,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import ru.usu.twitalk.App;
 import ru.usu.twitalk.Data;
 import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.net.Uri;
@@ -19,11 +20,11 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 	private static final String TAG = "Follower";
 	private DefaultHttpClient mClient = new DefaultHttpClient();
 	private OAuthConsumer mConsumer;
-	
+
 	public GetFollowersList(OAuthConsumer mConsumer) {
 		this.mConsumer = mConsumer;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
 		TwiTalkActivity.progressDialog.setTitle("WELCOME");
@@ -57,16 +58,23 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 	@Override
 	protected void onPostExecute(Void nada) {
 		TwiTalkActivity.progressDialog.dismiss();
-		for (String name : Data.FOLLOWERS)
-			Log.d(TAG, name);
-
+		for (String name : Data.infAbFollowers.keySet()) {
+			long id = Data.infAbFollowers.get(name);
+			Log.d(TAG, name + " " + id);
+			new GetUserTimeLine(mConsumer, id)
+					.execute(App.USER_TIMELINE_URL);
+		}
 	}
 
 	private void parseTimelineJSONObject(JSONObject object) throws Exception {
 
-		if (Data.FOLLOWERS.contains(object.getString("name")))
+		String name = object.getString("name");
+		long id = object.getLong("id_str");
+		if (Data.FOLLOWERS.contains(name)
+				&& Data.infAbFollowers.containsKey(name))
 			return;
-		Data.FOLLOWERS.add(object.getString("name"));
+		Data.FOLLOWERS.add(name);
+		Data.infAbFollowers.put(name, id);
 
 	}
 }

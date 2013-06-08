@@ -23,7 +23,7 @@ public class TwiTalkActivity extends Activity {
 	private Button btnLogoutTwitter;
 	private Button btnShowFriends;
 	private TextView lblUserName;
-	
+
 	public static ProgressDialog progressDialog;
 
 	private OAuthConsumer mConsumer = null;
@@ -41,8 +41,7 @@ public class TwiTalkActivity extends Activity {
 
 		mConsumer = ((App) getApplication()).getOAuthConsumer();
 
-		this.
-		lblUserName = (TextView) this.findViewById(R.id.lblUserName);
+		this.lblUserName = (TextView) this.findViewById(R.id.lblUserName);
 		lblUserName.setText(Data.USER_NAME);
 
 		btnLogin = (Button) this.findViewById(R.id.btnLogin);
@@ -50,10 +49,10 @@ public class TwiTalkActivity extends Activity {
 
 		btnLogoutTwitter = (Button) findViewById(R.id.btnLogoutTwitter);
 		btnLogoutTwitter.setOnClickListener(new LogoutButtonClickedListener());
-		
+
 		btnShowFriends = (Button) findViewById(R.id.btnFollowers);
 		btnShowFriends.setOnClickListener(new FriendsButtonClickedListener());
-		
+
 		progressDialog = new ProgressDialog(this);
 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
@@ -96,17 +95,20 @@ public class TwiTalkActivity extends Activity {
 			btnShowFriends.setVisibility(View.GONE);
 			btnLogoutTwitter.setVisibility(View.GONE);
 			Data.USER_NAME = "";
+			Data.USER_SCREEN_NAME = "";
 			Data.ID_AUTH_USER = 0;
 			lblUserName.setText(Data.USER_NAME);
 			Data.FOLLOWERS.clear();
+			Data.infAbFollowers.clear();
 
 		}
 	}
-	
+
 	class FriendsButtonClickedListener implements OnClickListener {
 
 		public boolean onCreateOptionsMenu(Menu menu) {
-			// Inflate the menu; this adds items to the action bar if it is present.
+			// Inflate the menu; this adds items to the action bar if it is
+			// present.
 			getMenuInflater().inflate(R.menu.main, menu);
 			return true;
 		}

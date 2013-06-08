@@ -51,7 +51,7 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 		if (loggedIn) {
 			Log.d(TAG, "user:" + Data.USER_NAME);
 			Log.d(TAG, "id:" + Data.ID_AUTH_USER);
-//			lblUserName.setText(Data.USER_NAME);
+			Log.d(TAG, "screen_name:" + Data.USER_SCREEN_NAME);
 //			new GetUserTimeLine(mConsumer, Data.ID_AUTH_USER).execute(App.USER_TIMELINE_URL);
 			new GetFollowersList(mConsumer).execute(App.GET_FOLLOWERS_LIST_URL);
 		} else {
@@ -63,6 +63,7 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 
 		Data.USER_NAME = object.getString("name");
 		Data.ID_AUTH_USER = object.getLong("id_str");
+		Data.USER_SCREEN_NAME = object.getString("screen_name");
 
 	}
 
