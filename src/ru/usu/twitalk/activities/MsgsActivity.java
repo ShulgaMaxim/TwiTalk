@@ -1,5 +1,3 @@
-/*
-
 package ru.usu.twitalk.activities;
 
 import ru.usu.twitalk.Data;
@@ -22,7 +20,7 @@ public class MsgsActivity extends Activity {
 		Intent intent = getIntent();
 	    String chosenContact = intent.getStringExtra("chosenContact");
 	    
-	    tvView.setText("Сообщения с " + chosenContact);
+	    tvView.setText("Tweets from " + chosenContact);
 	    
 	    // находим список
 	    ListView lvMsgs = (ListView) findViewById(R.id.lvMsgs);
@@ -32,10 +30,6 @@ public class MsgsActivity extends Activity {
 	    		android.R.layout.simple_list_item_1, Data.contactsWithMsgs.get(chosenContact));
 	    
 	    // присваиваем адаптер списку
-	    lvMsgs.setAdapter(adapter);
-	    
+	    lvMsgs.setAdapter(adapter);    
 	}
-	
 }
-
-*/

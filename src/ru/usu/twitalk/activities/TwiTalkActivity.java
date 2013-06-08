@@ -54,7 +54,7 @@ public class TwiTalkActivity extends Activity {
 		btnShowFriends.setOnClickListener(new FriendsButtonClickedListener());
 
 		progressDialog = new ProgressDialog(this);
-
+	 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
 	}

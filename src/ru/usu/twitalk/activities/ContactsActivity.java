@@ -1,7 +1,5 @@
 package ru.usu.twitalk.activities;
 
-import java.util.ArrayList;
-
 import ru.usu.twitalk.Data;
 import ru.usu.twitalk.R;
 import android.app.Activity;
@@ -24,29 +22,28 @@ public class ContactsActivity extends Activity {
 		
 		//if (Data.contactsWithMsgs.isEmpty()) {
 		if (Data.FOLLOWERS.isEmpty()) {
-			tvView.setText("� ��� ��� ��� �� ������ ��������");
+			tvView.setText("You don't have any contacts yet");
 		}
 		else {
-		//Object[] contacts = Data.contactsWithMsgs.keySet().toArray();
-			ArrayList<String> contacts = Data.FOLLOWERS;
+			Object[] contacts = Data.contactsWithMsgs.keySet().toArray();
+			
+			ListView lvContacts = (ListView) findViewById(R.id.lvContacts);
+			
+			ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(this,
+					R.layout.my_list_item, contacts);
+			
+			lvContacts.setAdapter(adapter);
+			
+			lvContacts.setOnItemClickListener(new OnItemClickListener() {
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					TextView chosenContact = (TextView) view.findViewById(view.getId());
+					Intent intent = new Intent("ru.usu.intent.action.showmsgs");
+					intent.putExtra("chosenContact", chosenContact.getText());
+					startActivity(intent);
+					}
+				});
+			}
 		
-		ListView lvContacts = (ListView) findViewById(R.id.lvContacts);
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
-    		R.layout.my_list_item, contacts);
-		
-		lvContacts.setAdapter(adapter);
-		
-		
-		lvContacts.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				TextView chosenContact = (TextView) view.findViewById(view.getId());
-				Intent intent = new Intent("ru.usu.intent.action.showmsgs");
-				intent.putExtra("chosenContact", chosenContact.getText());
-				startActivity(intent);
-				}
-			});
-		}
 	}
 }
