@@ -100,6 +100,7 @@ public class TwiTalkActivity extends Activity {
 			lblUserName.setText(Data.USER_NAME);
 			Data.FOLLOWERS.clear();
 			Data.infAbFollowers.clear();
+			Data.contactsWithMsgs.clear();
 
 		}
 	}

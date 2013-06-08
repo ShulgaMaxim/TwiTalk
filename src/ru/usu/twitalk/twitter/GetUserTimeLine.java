@@ -61,9 +61,10 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 			String msg = object.getString("text");
 			if (Data.contactsWithMsgs.containsKey(name)) {
 				list = Data.contactsWithMsgs.get(name);
-			} else {
+			} else if (!Data.contactsWithMsgs.get(name).contains(msg)){
 				list = new ArrayList<String>();
-			}
+			} else
+				return;
 			list.add(msg);
 			Data.contactsWithMsgs.put(name, list);
 			Log.d(TAG, name + " " + msg);
