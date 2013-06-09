@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import ru.usu.twitalk.App;
 import ru.usu.twitalk.Data;
+import ru.usu.twitalk.R;
 import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -27,9 +28,9 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPreExecute() {
-		TwiTalkActivity.progressDialog.setTitle("WELCOME");
-		TwiTalkActivity.progressDialog.setMessage("Loading contacts...");
-		TwiTalkActivity.progressDialog.show();
+		TwiTalkActivity.loadingContactsDialog.setTitle("Please wait");
+		TwiTalkActivity.loadingContactsDialog.setMessage("Loading contacts...");
+		TwiTalkActivity.loadingContactsDialog.show();
 		Log.d(TAG, "Waitng");
 	}
 
@@ -57,13 +58,13 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void nada) {
-		TwiTalkActivity.progressDialog.dismiss();
 		for (String name : Data.infAbFollowers.keySet()) {
 			long id = Data.infAbFollowers.get(name);
 			Log.d(TAG, name + " " + id);
 			new GetUserTimeLine(mConsumer, id)
 					.execute(App.USER_TIMELINE_URL);
 		}
+		TwiTalkActivity.loadingContactsDialog.dismiss();
 	}
 
 	private void parseTimelineJSONObject(JSONObject object) throws Exception {

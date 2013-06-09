@@ -21,10 +21,14 @@ public class TwiTalkActivity extends Activity {
 
 	private Button btnLogin;
 	private Button btnLogoutTwitter;
-	private Button btnShowFriends;
+	public static Button btnShowFriends;
+	private Button btnReload;
+	
 	private TextView lblUserName;
 
-	public static ProgressDialog progressDialog;
+	public static ProgressDialog loadingContactsDialog;
+	public static ProgressDialog loadingUserDataDialog;
+	public static ProgressDialog loadingTweetsDialog;
 
 	private OAuthConsumer mConsumer = null;
 
@@ -52,8 +56,13 @@ public class TwiTalkActivity extends Activity {
 
 		btnShowFriends = (Button) findViewById(R.id.btnFollowers);
 		btnShowFriends.setOnClickListener(new FriendsButtonClickedListener());
+		
+		btnReload = (Button) findViewById(R.id.btnReloadUserData);
+		btnReload.setOnClickListener(new ReloadUserDataButtonClickedListener());
 
-		progressDialog = new ProgressDialog(this);
+		loadingContactsDialog = new ProgressDialog(this);
+		loadingUserDataDialog = new ProgressDialog(this);
+		loadingTweetsDialog = new ProgressDialog(this);
 	 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -71,7 +80,9 @@ public class TwiTalkActivity extends Activity {
 				mConsumer.setTokenWithSecret(mToken, mSecret);
 				btnLogin.setVisibility(View.GONE);
 				btnShowFriends.setVisibility(View.VISIBLE);
+				btnShowFriends.setEnabled(false);
 				btnLogoutTwitter.setVisibility(View.VISIBLE);
+				btnReload.setVisibility(View.VISIBLE);
 				(new GetCredentialsTask(mConsumer)).execute();
 			}
 		}
@@ -94,6 +105,8 @@ public class TwiTalkActivity extends Activity {
 			btnLogin.setVisibility(View.VISIBLE);
 			btnShowFriends.setVisibility(View.GONE);
 			btnLogoutTwitter.setVisibility(View.GONE);
+			btnReload.setVisibility(View.GONE);
+			
 			Data.USER_NAME = "";
 			Data.USER_SCREEN_NAME = "";
 			Data.ID_AUTH_USER = 0;
@@ -119,5 +132,15 @@ public class TwiTalkActivity extends Activity {
 			Intent intent = new Intent("ru.usu.intent.action.showcontacts");
 			startActivity(intent);
 		}
+	}
+	
+	class ReloadUserDataButtonClickedListener implements OnClickListener {
+
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

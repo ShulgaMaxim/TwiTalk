@@ -66,5 +66,14 @@
         android:layout_marginRight="10dip"
         android:layout_marginTop="50dip"
         android:visibility="gone"/>
-
+    
+    <!-- Twitter Reload button -->
+    <Button android:id="@+id/btnReloadUserData"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/reload_contacts_and_tweets"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="50dip"
+        android:visibility="gone"/>
 </LinearLayout>

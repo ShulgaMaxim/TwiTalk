@@ -12,5 +12,6 @@
     <string name="show_followers">Show followers</string>
     <string name="logout">Logout from Twitter</string>
     <string name="tweet">Tweet</string>
+    <string name="reload_contacts_and_tweets">Reload</string>
 
 </resources>

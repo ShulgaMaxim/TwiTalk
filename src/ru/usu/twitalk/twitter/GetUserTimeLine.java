@@ -28,7 +28,7 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 		this.mConsumer = mConsumer;
 		this.user_id = user_id;
 	}
-
+	
 	@Override
 	protected Void doInBackground(String... params) {
 		JSONArray array = null;
@@ -51,8 +51,8 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 		}
 		return null;
 	}
-
-	private void parseTimelineJSONObject(JSONObject object) {
+	
+ 	private void parseTimelineJSONObject(JSONObject object) {
 		JSONObject user;
 		ArrayList<String> list;
 		try {

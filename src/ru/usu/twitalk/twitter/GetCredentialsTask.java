@@ -9,12 +9,13 @@ import org.json.JSONObject;
 
 import ru.usu.twitalk.App;
 import ru.usu.twitalk.Data;
+import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 
-	private OAuthConsumer mConsumer; 
+	private OAuthConsumer mConsumer;
 	private static final String TAG = "GetCredentialsTask";
 	
 	public GetCredentialsTask(OAuthConsumer mConsumer) {
@@ -23,11 +24,15 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 	
 	@Override
 	protected void onPreExecute() {
+		TwiTalkActivity.loadingUserDataDialog.setTitle("WELCOME");
+		TwiTalkActivity.loadingUserDataDialog.setMessage("Gathering user data...");
+		TwiTalkActivity.loadingUserDataDialog.show();
 		Log.d(TAG, "Waiting");
 	}
 	
 	@Override
 	protected Boolean doInBackground(Void... arg0) {
+		
 		DefaultHttpClient mClient = new DefaultHttpClient();
 
 		JSONObject jso = null;
@@ -56,6 +61,8 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 		} else {
 			Log.d(TAG, "beda");
 		}
+		TwiTalkActivity.loadingUserDataDialog.dismiss();
+		TwiTalkActivity.btnShowFriends.setEnabled(true);
 	}
 	
 	private void parseVerifyUserJSONObject(JSONObject object) throws Exception {
