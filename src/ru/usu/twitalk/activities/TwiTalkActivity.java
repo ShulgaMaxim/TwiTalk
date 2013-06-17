@@ -23,6 +23,8 @@ public class TwiTalkActivity extends Activity {
 	public static Button btnShowFriends;
 	private Button btnReload;
 
+	private boolean firstTimeLaunched;
+	
 	private Data instance = Data.getInstance();
 	
 	public static ProgressDialog loadingContactsDialog;
@@ -79,7 +81,13 @@ public class TwiTalkActivity extends Activity {
 				btnShowFriends.setEnabled(false);
 				btnLogoutTwitter.setVisibility(View.VISIBLE);
 				btnReload.setVisibility(View.VISIBLE);
-				(new GetCredentialsTask(mConsumer)).execute();
+				if (!firstTimeLaunched) {
+					(new GetCredentialsTask(mConsumer)).execute();
+					firstTimeLaunched = true;
+				}
+				if (instance.FOLLOWERS.size() > 0)
+					btnShowFriends.setEnabled(true);
+//				(new GetCredentialsTask(mConsumer)).execute();
 			}
 		}
 	}
@@ -102,6 +110,7 @@ public class TwiTalkActivity extends Activity {
 			btnShowFriends.setVisibility(View.GONE);
 			btnLogoutTwitter.setVisibility(View.GONE);
 			btnReload.setVisibility(View.GONE);
+			firstTimeLaunched = false;
 			clearData();
 
 		}
@@ -136,8 +145,7 @@ public class TwiTalkActivity extends Activity {
 
 		@Override
 		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
-			
+			(new GetCredentialsTask(mConsumer)).execute();
 		}
 		
 	}
