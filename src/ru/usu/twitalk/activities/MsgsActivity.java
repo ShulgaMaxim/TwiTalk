@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MsgsActivity extends Activity {
+	
+	private Data instance = Data.getInstance();
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,14 +24,14 @@ public class MsgsActivity extends Activity {
 	    
 	    tvView.setText("Tweets from " + chosenContact);
 	    
-	    // находим список
+	    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	    ListView lvMsgs = (ListView) findViewById(R.id.lvMsgs);
 	    
-	    // создаем адаптер
+	    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-	    		android.R.layout.simple_list_item_1, Data.contactsWithMsgs.get(chosenContact));
+	    		android.R.layout.simple_list_item_1, instance.contactsWithMsgs.get(chosenContact));
 	    
-	    // присваиваем адаптер списку
+	    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	    lvMsgs.setAdapter(adapter);    
 	}
 }

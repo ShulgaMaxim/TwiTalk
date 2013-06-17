@@ -7,12 +7,28 @@ import java.util.TreeMap;
 
 public class Data {
 
-	public static ArrayList<String> FOLLOWERS = new ArrayList<String>();
-	public static Map<String,Long> infAbFollowers = new HashMap<String,Long>();
-	public static String USER_NAME;
-	public static String USER_TEXT;
-	public static String USER_SCREEN_NAME;
-	public static long ID_AUTH_USER;
-	public static Map<String, ArrayList<String>> contactsWithMsgs = new TreeMap<String, ArrayList<String>>();
+	private static Data instance;
+
+	public ArrayList<String> FOLLOWERS;
+	public Map<String, Long> infAbFollowers;
+	public Map<String, String> infAbOAuthUser;
+	public Map<String, ArrayList<String>> contactsWithMsgs;
+
+	public static final String USER_NAME = "name";
+	public static final String USER_SCREEN_NAME = "screen_name";
+	public static final String ID_AUTH_USER = "id_str";
+
+	public static Data getInstance() {
+		if (instance == null)
+			instance = new Data();
+		return instance;
+	}
+
+	private Data() {
+		FOLLOWERS = new ArrayList<String>();
+		infAbFollowers = new HashMap<String, Long>();
+		contactsWithMsgs = new TreeMap<String, ArrayList<String>>();
+		infAbOAuthUser = new HashMap<String, String>();
+	}
 
 }

@@ -23,12 +23,13 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 	private OAuthConsumer mConsumer;
 	private long user_id;
 	private DefaultHttpClient mClient = new DefaultHttpClient();
+	private Data instance = Data.getInstance();
 
 	public GetUserTimeLine(OAuthConsumer mConsumer, long user_id) {
 		this.mConsumer = mConsumer;
 		this.user_id = user_id;
 	}
-	
+
 	@Override
 	protected Void doInBackground(String... params) {
 		JSONArray array = null;
@@ -37,7 +38,6 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 			Uri.Builder builder = sUri.buildUpon();
 			builder.appendQueryParameter("user_id", String.valueOf(user_id));
 			builder.appendQueryParameter("count", "2");
-			// Log.d(TAG,builder.build().toString());
 			HttpGet get = new HttpGet(builder.build().toString());
 			mConsumer.sign(get);
 			String response = mClient.execute(get, new BasicResponseHandler());
@@ -51,24 +51,24 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 		}
 		return null;
 	}
-	
- 	private void parseTimelineJSONObject(JSONObject object) {
+
+	private void parseTimelineJSONObject(JSONObject object) {
 		JSONObject user;
 		ArrayList<String> list;
 		try {
 			user = object.getJSONObject("user");
 			String name = user.getString("name");
 			String msg = object.getString("text");
-			if (Data.contactsWithMsgs.containsKey(name))
-				if (!Data.contactsWithMsgs.get(name).contains(msg))
-					list = Data.contactsWithMsgs.get(name);
+			if (instance.contactsWithMsgs.containsKey(name))
+				if (!instance.contactsWithMsgs.get(name).contains(msg))
+					list = instance.contactsWithMsgs.get(name);
 				else
 					return;
 			else
 				list = new ArrayList<String>();
 
 			list.add(msg);
-			Data.contactsWithMsgs.put(name, list);
+			instance.contactsWithMsgs.put(name, list);
 			Log.d(TAG, name + " " + msg);
 		} catch (JSONException e) {
 			Log.e(TAG, "Couldn't take user data", e);

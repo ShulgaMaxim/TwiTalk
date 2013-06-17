@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 public class ContactsActivity extends Activity {
 	
+	private Data instance = Data.getInstance();
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contacts);
@@ -21,11 +23,11 @@ public class ContactsActivity extends Activity {
 		TextView tvView = (TextView) findViewById(R.id.contactsHeader);
 		
 		//if (Data.contactsWithMsgs.isEmpty()) {
-		if (Data.FOLLOWERS.isEmpty()) {
+		if (instance.FOLLOWERS.isEmpty()) {
 			tvView.setText("You don't have any contacts yet");
 		}
 		else {
-			Object[] contacts = Data.contactsWithMsgs.keySet().toArray();
+			Object[] contacts = instance.contactsWithMsgs.keySet().toArray();
 			
 			ListView lvContacts = (ListView) findViewById(R.id.lvContacts);
 			

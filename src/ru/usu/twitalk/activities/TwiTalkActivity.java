@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class TwiTalkActivity extends Activity {
 
@@ -23,9 +22,9 @@ public class TwiTalkActivity extends Activity {
 	private Button btnLogoutTwitter;
 	public static Button btnShowFriends;
 	private Button btnReload;
-	
-	private TextView lblUserName;
 
+	private Data instance = Data.getInstance();
+	
 	public static ProgressDialog loadingContactsDialog;
 	public static ProgressDialog loadingUserDataDialog;
 	public static ProgressDialog loadingTweetsDialog;
@@ -44,9 +43,6 @@ public class TwiTalkActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		mConsumer = ((App) getApplication()).getOAuthConsumer();
-
-		this.lblUserName = (TextView) this.findViewById(R.id.lblUserName);
-		lblUserName.setText(Data.USER_NAME);
 
 		btnLogin = (Button) this.findViewById(R.id.btnLogin);
 		btnLogin.setOnClickListener(new LoginButtonClickedListener());
@@ -106,16 +102,18 @@ public class TwiTalkActivity extends Activity {
 			btnShowFriends.setVisibility(View.GONE);
 			btnLogoutTwitter.setVisibility(View.GONE);
 			btnReload.setVisibility(View.GONE);
-			
-			Data.USER_NAME = "";
-			Data.USER_SCREEN_NAME = "";
-			Data.ID_AUTH_USER = 0;
-			lblUserName.setText(Data.USER_NAME);
-			Data.FOLLOWERS.clear();
-			Data.infAbFollowers.clear();
-			Data.contactsWithMsgs.clear();
+			clearData();
 
 		}
+	}
+	
+	private void clearData() {
+
+		instance.infAbOAuthUser.clear();
+		instance.FOLLOWERS.clear();
+		instance.infAbFollowers.clear();
+		instance.contactsWithMsgs.clear();
+		
 	}
 
 	class FriendsButtonClickedListener implements OnClickListener {

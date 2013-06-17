@@ -18,6 +18,8 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 	private OAuthConsumer mConsumer;
 	private static final String TAG = "GetCredentialsTask";
 	
+	private Data instance = Data.getInstance();
+	
 	public GetCredentialsTask(OAuthConsumer mConsumer) {
 		this.mConsumer = mConsumer;
 	}
@@ -54,9 +56,9 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 	protected void onPostExecute(Boolean loggedIn) {
 
 		if (loggedIn) {
-			Log.d(TAG, "user:" + Data.USER_NAME);
-			Log.d(TAG, "id:" + Data.ID_AUTH_USER);
-			Log.d(TAG, "screen_name:" + Data.USER_SCREEN_NAME);
+			Log.d(TAG, "user:" + instance.infAbOAuthUser.get(Data.USER_NAME));
+			Log.d(TAG, "id:" + instance.infAbOAuthUser.get(Data.ID_AUTH_USER));
+			Log.d(TAG, "screen_name:" + instance.infAbOAuthUser.get(Data.USER_SCREEN_NAME));
 			new GetFollowersList(mConsumer).execute(App.GET_FOLLOWERS_LIST_URL);
 		} else {
 			Log.d(TAG, "beda");
@@ -67,9 +69,9 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 	
 	private void parseVerifyUserJSONObject(JSONObject object) throws Exception {
 
-		Data.USER_NAME = object.getString("name");
-		Data.ID_AUTH_USER = object.getLong("id_str");
-		Data.USER_SCREEN_NAME = object.getString("screen_name");
+		instance.infAbOAuthUser.put(Data.USER_NAME, object.getString("name"));
+		instance.infAbOAuthUser.put(Data.ID_AUTH_USER, object.getString("id_str"));
+		instance.infAbOAuthUser.put(Data.USER_SCREEN_NAME, object.getString("screen_name"));
 
 	}
 
