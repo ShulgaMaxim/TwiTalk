@@ -2,15 +2,15 @@ package ru.usu.twitalk;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Data {
 
 	private static Data instance;
 
-	public List<String> friends;
+	public Set<String> friends;
 	public Map<String, Long> infAbFriends;
 	public Map<String, String> infAbOAuthUser;
 	public Map<String, ArrayList<String>> contactsWithMsgs;
@@ -26,9 +26,9 @@ public class Data {
 	}
 
 	private Data() {
-		friends = new ArrayList<String>();
+		friends = new TreeSet<String>();
 		infAbFriends = new HashMap<String, Long>();
-		contactsWithMsgs = new TreeMap<String, ArrayList<String>>();
+		contactsWithMsgs = new HashMap<String, ArrayList<String>>();
 		infAbOAuthUser = new HashMap<String, String>();
 	}
 

@@ -31,7 +31,7 @@ public class TwiTalkActivity extends Activity {
 	public static ProgressDialog loadingUserDataDialog;
 	public static ProgressDialog loadingTweetsDialog;
 
-	private OAuthConsumer mConsumer = null;
+	private static OAuthConsumer mConsumer = null;
 
 	private String mToken;
 	private String mSecret;
@@ -145,5 +145,9 @@ public class TwiTalkActivity extends Activity {
 			(new GetCredentialsTask(mConsumer)).execute();
 		}
 		
+	}
+	
+	public static OAuthConsumer getConsumer() {
+		return mConsumer;
 	}
 }
