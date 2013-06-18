@@ -22,12 +22,11 @@ public class ContactsActivity extends Activity {
 		
 		TextView tvView = (TextView) findViewById(R.id.contactsHeader);
 		
-		//if (Data.contactsWithMsgs.isEmpty()) {
-		if (instance.FOLLOWERS.isEmpty()) {
+		if (instance.friends.isEmpty()) {
 			tvView.setText("You don't have any contacts yet");
 		}
 		else {
-			Object[] contacts = instance.contactsWithMsgs.keySet().toArray();
+			Object[] contacts = instance.friends.toArray();
 			
 			ListView lvContacts = (ListView) findViewById(R.id.lvContacts);
 			

@@ -2,6 +2,7 @@ package ru.usu.twitalk;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -9,8 +10,8 @@ public class Data {
 
 	private static Data instance;
 
-	public ArrayList<String> FOLLOWERS;
-	public Map<String, Long> infAbFollowers;
+	public List<String> friends;
+	public Map<String, Long> infAbFriends;
 	public Map<String, String> infAbOAuthUser;
 	public Map<String, ArrayList<String>> contactsWithMsgs;
 
@@ -25,8 +26,8 @@ public class Data {
 	}
 
 	private Data() {
-		FOLLOWERS = new ArrayList<String>();
-		infAbFollowers = new HashMap<String, Long>();
+		friends = new ArrayList<String>();
+		infAbFriends = new HashMap<String, Long>();
 		contactsWithMsgs = new TreeMap<String, ArrayList<String>>();
 		infAbOAuthUser = new HashMap<String, String>();
 	}

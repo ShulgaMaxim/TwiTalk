@@ -14,13 +14,6 @@
         android:layout_marginRight="10dip"
         android:layout_marginTop="30dip"
         android:text="@string/login" />
-    
-    <!-- user name label -->
-    <TextView android:id="@+id/lblUserName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:layout_marginTop="30dip"/>
 
     <!-- label update status -->
     <TextView android:id="@+id/lblUpdate" 
@@ -31,27 +24,11 @@
         android:layout_marginRight="10dip"
         android:visibility="gone"/>
     
-    <!-- Tweet EditText -->
-    <EditText android:id="@+id/txtUpdateStatus"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dip"
-        android:visibility="gone"/>
-    
-    <!-- Tweet Button -->
-    <Button android:id="@+id/btnUpdateStatus"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tweet"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:visibility="gone"/>
-    
     <!-- Twitter Followers button -->
     <Button android:id="@+id/btnFollowers"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/show_followers"
+        android:text="@string/show_friends"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:layout_marginTop="50dip"

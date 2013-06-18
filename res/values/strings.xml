@@ -9,7 +9,7 @@
     <string name="show_contacts">Show contacts</string>
     <string name="login">Login with Twitter</string>
     <string name="update_status">Update Status</string>
-    <string name="show_followers">Show followers</string>
+    <string name="show_friends">Show friends</string>
     <string name="logout">Logout from Twitter</string>
     <string name="tweet">Tweet</string>
     <string name="reload_contacts_and_tweets">Reload</string>

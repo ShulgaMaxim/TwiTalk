@@ -59,12 +59,11 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 			Log.d(TAG, "user:" + instance.infAbOAuthUser.get(Data.USER_NAME));
 			Log.d(TAG, "id:" + instance.infAbOAuthUser.get(Data.ID_AUTH_USER));
 			Log.d(TAG, "screen_name:" + instance.infAbOAuthUser.get(Data.USER_SCREEN_NAME));
-			new GetFollowersList(mConsumer).execute(App.GET_FOLLOWERS_LIST_URL);
+			new GetFriendsList(mConsumer).execute(App.GET_FRIENDS_LIST_URL);
 		} else {
-			Log.d(TAG, "beda");
+			Log.d(TAG, "fail");
 		}
 		TwiTalkActivity.loadingUserDataDialog.dismiss();
-		TwiTalkActivity.btnShowFriends.setEnabled(true);
 	}
 	
 	private void parseVerifyUserJSONObject(JSONObject object) throws Exception {

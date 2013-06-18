@@ -78,16 +78,13 @@ public class TwiTalkActivity extends Activity {
 				mConsumer.setTokenWithSecret(mToken, mSecret);
 				btnLogin.setVisibility(View.GONE);
 				btnShowFriends.setVisibility(View.VISIBLE);
-				btnShowFriends.setEnabled(false);
 				btnLogoutTwitter.setVisibility(View.VISIBLE);
 				btnReload.setVisibility(View.VISIBLE);
 				if (!firstTimeLaunched) {
 					(new GetCredentialsTask(mConsumer)).execute();
 					firstTimeLaunched = true;
 				}
-				if (instance.FOLLOWERS.size() > 0)
-					btnShowFriends.setEnabled(true);
-//				(new GetCredentialsTask(mConsumer)).execute();
+				
 			}
 		}
 	}
@@ -119,8 +116,8 @@ public class TwiTalkActivity extends Activity {
 	private void clearData() {
 
 		instance.infAbOAuthUser.clear();
-		instance.FOLLOWERS.clear();
-		instance.infAbFollowers.clear();
+		instance.friends.clear();
+		instance.infAbFriends.clear();
 		instance.contactsWithMsgs.clear();
 		
 	}

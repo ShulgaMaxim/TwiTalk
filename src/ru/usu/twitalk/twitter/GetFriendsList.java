@@ -15,14 +15,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class GetFollowersList extends AsyncTask<String, Void, Void> {
+public class GetFriendsList extends AsyncTask<String, Void, Void> {
 
 	private Data instance = Data.getInstance();
-	private static final String TAG = "Follower";
+	private static final String TAG = "Friend";
 	private DefaultHttpClient mClient = new DefaultHttpClient();
 	private OAuthConsumer mConsumer;
 
-	public GetFollowersList(OAuthConsumer mConsumer) {
+	public GetFriendsList(OAuthConsumer mConsumer) {
 		this.mConsumer = mConsumer;
 	}
 
@@ -58,8 +58,8 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void nada) {
-		for (String name : instance.infAbFollowers.keySet()) {
-			long id = instance.infAbFollowers.get(name);
+		for (String name : instance.infAbFriends.keySet()) {
+			long id = instance.infAbFriends.get(name);
 			Log.d(TAG, name + " " + id);
 			new GetUserTimeLine(mConsumer, id)
 					.execute(App.USER_TIMELINE_URL);
@@ -71,11 +71,11 @@ public class GetFollowersList extends AsyncTask<String, Void, Void> {
 
 		String name = object.getString("name");
 		long id = object.getLong("id_str");
-		if (instance.FOLLOWERS.contains(name)
-				&& instance.infAbFollowers.containsKey(name))
+		if (instance.friends.contains(name)
+				&& instance.infAbFriends.containsKey(name))
 			return;
-		instance.FOLLOWERS.add(name);
-		instance.infAbFollowers.put(name, id);
+		instance.friends.add(name);
+		instance.infAbFriends.put(name, id);
 
 	}
 }
