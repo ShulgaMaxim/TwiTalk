@@ -26,7 +26,7 @@ public class GetCredentialsTask extends AsyncTask<Void, Void, Boolean> {
 	
 	@Override
 	protected void onPreExecute() {
-		TwiTalkActivity.loadingUserDataDialog.setTitle("WELCOME");
+		//TwiTalkActivity.loadingUserDataDialog.setTitle("WELCOME");
 		TwiTalkActivity.loadingUserDataDialog.setMessage("Gathering user data...");
 		TwiTalkActivity.loadingUserDataDialog.show();
 		Log.d(TAG, "Waiting");

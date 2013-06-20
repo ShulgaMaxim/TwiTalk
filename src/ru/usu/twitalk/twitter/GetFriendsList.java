@@ -28,7 +28,6 @@ public class GetFriendsList extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPreExecute() {
-		TwiTalkActivity.loadingContactsDialog.setTitle("Please wait");
 		TwiTalkActivity.loadingContactsDialog.setMessage("Loading contacts...");
 		TwiTalkActivity.loadingContactsDialog.show();
 		Log.d(TAG, "Waitng");

@@ -13,5 +13,7 @@
     <string name="logout">Logout from Twitter</string>
     <string name="tweet">Tweet</string>
     <string name="reload_contacts_and_tweets">Reload</string>
+    <string name="send">Send</string>
+    <string name="Input_hint">Input your message...</string>
 
 </resources>

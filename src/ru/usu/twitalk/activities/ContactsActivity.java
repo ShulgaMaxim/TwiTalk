@@ -24,7 +24,7 @@ public class ContactsActivity extends Activity {
 		TextView tvView = (TextView) findViewById(R.id.contactsHeader);
 
 		if (instance.friends.isEmpty()) {
-			tvView.setText("You don't have any contacts yet");
+			tvView.setText("You don't have contacts");
 		} else {
 			Object[] contacts = instance.friends.toArray();
 
