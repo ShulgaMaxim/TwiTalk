@@ -21,13 +21,12 @@ import android.util.Log;
 public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 
 	private static final String TAG = "User timeline";
-	private OAuthConsumer mConsumer;
+	private OAuthConsumer mConsumer = TwiTalkActivity.getConsumer();
 	private long user_id;
 	private DefaultHttpClient mClient = new DefaultHttpClient();
 	private Data instance = Data.getInstance();
 
-	public GetUserTimeLine(OAuthConsumer mConsumer, long user_id) {
-		this.mConsumer = mConsumer;
+	public GetUserTimeLine(long user_id) {
 		this.user_id = user_id;
 	}
 
@@ -37,7 +36,7 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 		TwiTalkActivity.loadingMessagesDialog.show();
 		Log.d(TAG, "Waitng");
 	}
-	
+
 	@Override
 	protected Void doInBackground(String... params) {
 		JSONArray array = null;
@@ -63,7 +62,7 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 	protected void onPostExecute(Void nada) {
 		TwiTalkActivity.loadingMessagesDialog.dismiss();
 	}
-	
+
 	private void parseTimelineJSONObject(JSONObject object) {
 		JSONObject user;
 		ArrayList<String> list;

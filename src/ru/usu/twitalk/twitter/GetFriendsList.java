@@ -20,11 +20,8 @@ public class GetFriendsList extends AsyncTask<String, Void, Void> {
 	private Data instance = Data.getInstance();
 	private static final String TAG = "Friend";
 	private DefaultHttpClient mClient = new DefaultHttpClient();
-	private OAuthConsumer mConsumer;
+	private OAuthConsumer mConsumer = TwiTalkActivity.getConsumer();
 
-	public GetFriendsList(OAuthConsumer mConsumer) {
-		this.mConsumer = mConsumer;
-	}
 
 	@Override
 	protected void onPreExecute() {
@@ -60,7 +57,7 @@ public class GetFriendsList extends AsyncTask<String, Void, Void> {
 		for (String name : instance.infAbFriends.keySet()) {
 			long id = instance.infAbFriends.get(name);
 			Log.d(TAG, name + " " + id);
-			new GetUserTimeLine(mConsumer, id)
+			new GetUserTimeLine(id)
 					.execute(App.USER_TIMELINE_URL);
 		}
 		TwiTalkActivity.loadingContactsDialog.dismiss();

@@ -32,4 +32,4 @@ public class Data {
 		infAbOAuthUser = new HashMap<String, String>();
 	}
 
-}
+}	
