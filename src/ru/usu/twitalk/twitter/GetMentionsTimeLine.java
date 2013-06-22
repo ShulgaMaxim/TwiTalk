@@ -1,7 +1,5 @@
 package ru.usu.twitalk.twitter;
 
-import java.util.ArrayList;
-
 import oauth.signpost.OAuthConsumer;
 
 import org.apache.http.client.methods.HttpGet;
@@ -12,30 +10,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ru.usu.twitalk.Data;
-import ru.usu.twitalk.activities.ContactsActivity;
 import ru.usu.twitalk.activities.TwiTalkActivity;
-
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
+public class GetMentionsTimeLine extends AsyncTask<String, Void, Void> {
 
-	private static final String TAG = "User timeline";
+	private static final String TAG = "Mentions timeline";
 	private OAuthConsumer mConsumer = TwiTalkActivity.getConsumer();
-	private long user_id;
 	private DefaultHttpClient mClient = new DefaultHttpClient();
 	private Data instance = Data.getInstance();
 
-	public GetUserTimeLine(long user_id) {
-		this.user_id = user_id;
-	}
-
 	@Override
 	protected void onPreExecute() {
-		ContactsActivity.loadingMessagesDialog
-				.setMessage("Loading messages...");
-		ContactsActivity.loadingMessagesDialog.show();
 		Log.d(TAG, "Waitng");
 	}
 
@@ -46,8 +34,6 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 			try {
 				Uri sUri = Uri.parse(params[0]);
 				Uri.Builder builder = sUri.buildUpon();
-				builder.appendQueryParameter("user_id", String.valueOf(user_id));
-				builder.appendQueryParameter("count", "2");
 				HttpGet get = new HttpGet(builder.build().toString());
 				mConsumer.sign(get);
 				String response = mClient.execute(get,
@@ -65,33 +51,19 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 	}
 
 	protected void onPostExecute(Void nada) {
-		Log.d(TAG, "Messages Loaded");
-		ContactsActivity.loadingMessagesDialog.dismiss();
 	}
 
 	private void parseTimelineJSONObject(JSONObject object) {
 		JSONObject user;
-		ArrayList<String> list;
 		try {
 			user = object.getJSONObject("user");
 			String name = user.getString("name");
-			String msg = object.getString("text");
-			if (instance.contactsWithMsgs.containsKey(name))
-				if (!instance.contactsWithMsgs.get(name).contains(msg))
-					list = instance.contactsWithMsgs.get(name);
-				else
-					return;
-			else
-				list = new ArrayList<String>();
-
-			list.add(msg);
-			instance.contactsWithMsgs.put(name, list);
-			Log.d(TAG, name + " " + msg);
-		} catch (JSONException e) {
-			Log.e(TAG, "Couldn't take user data", e);
+			String text = object.getString("text");
+			Log.d(TAG, name + " " + text);
+		} catch (JSONException e1) {
+			Log.e(TAG, "JSON exception");
 			return;
 		}
 
 	}
-
 }

@@ -8,6 +8,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import ru.usu.twitalk.App;
 import ru.usu.twitalk.Data;
 import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.net.Uri;
@@ -52,13 +53,12 @@ public class GetFriendsList extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void nada) {
-		/*
-		for (String usr : instance.users.keySet()) {
-			long id = instance.users.get(usr).getId();
-			Log.d(TAG, instance.users.get(usr).getName() + " " + id);
-			new GetUserTimeLine(id).execute(App.USER_TIMELINE_URL);
-		}
-		*/
+
+		// for (String usr : instance.users.keySet()) {
+		// new TestSearchTwitts().execute(App.SEARCH_TWITTS_URL);
+		new GetMentionsTimeLine().execute(App.MENTIONS_TIMELINE_URL);
+		// }
+
 		TwiTalkActivity.loadingContactsDialog.dismiss();
 	}
 

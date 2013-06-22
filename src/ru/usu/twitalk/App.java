@@ -19,6 +19,8 @@ public class App extends Application {
 	public static final String GET_FOLLOWERS_LIST_URL = "https://api.twitter.com/1.1/followers/list.json";
 	public static final String USER_TIMELINE_URL = "https://api.twitter.com/1.1/statuses/user_timeline.json";
 	public static final String GET_FRIENDS_LIST_URL = "https://api.twitter.com/1.1/friends/list.json";
+	public static final String MENTIONS_TIMELINE_URL = "https://api.twitter.com/1.1/statuses/mentions_timeline.json";
+	public static final String SEARCH_TWITTS_URL = "https://api.twitter.com/1.1/search/tweets.json";
 	
 	public static final String USER_TOKEN = "user_token";
 	public static final String USER_SECRET = "user_secret";
