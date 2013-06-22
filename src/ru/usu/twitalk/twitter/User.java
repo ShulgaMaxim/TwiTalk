@@ -7,7 +7,6 @@ public class User {
 	private String screen_name;
 	
 	public User(String name, long id, String screen_name) {
-		this.name = name;
 		this.id = id;
 		this.screen_name = screen_name;
 	}

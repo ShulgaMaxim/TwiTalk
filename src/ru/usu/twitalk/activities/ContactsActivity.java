@@ -23,10 +23,10 @@ public class ContactsActivity extends Activity {
 
 		TextView tvView = (TextView) findViewById(R.id.contactsHeader);
 
-		if (instance.friends.isEmpty()) {
+		if (instance.users.isEmpty()) {
 			tvView.setText("You don't have contacts");
 		} else {
-			Object[] contacts = instance.friends.toArray();
+			Object[] contacts = instance.users.keySet().toArray();
 
 			ListView lvContacts = (ListView) findViewById(R.id.lvContacts);
 

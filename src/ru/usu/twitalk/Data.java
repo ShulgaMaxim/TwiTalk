@@ -2,10 +2,7 @@ package ru.usu.twitalk;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import ru.usu.twitalk.twitter.User;
 
@@ -13,10 +10,8 @@ public class Data {
 
 	private static Data instance;
 
-	//set friends
-	public Set<String> friends;
 	//info about frends
-	public Set<User> users;
+	public Map<String, User> users;
 	//info about OAuth user
 	public Map<String, String> infAbOAuthUser;
 	public Map<String, ArrayList<String>> contactsWithMsgs;
@@ -32,8 +27,7 @@ public class Data {
 	}
 
 	private Data() {
-		friends = new TreeSet<String>();
-		users = new HashSet<User>();
+		users = new HashMap<String, User>();
 		contactsWithMsgs = new HashMap<String, ArrayList<String>>();
 		infAbOAuthUser = new HashMap<String, String>();
 	}
