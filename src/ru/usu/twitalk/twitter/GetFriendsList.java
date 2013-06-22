@@ -8,7 +8,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import ru.usu.twitalk.App;
 import ru.usu.twitalk.Data;
 import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.net.Uri;

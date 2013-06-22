@@ -19,26 +19,27 @@ public class MsgsActivity extends Activity {
 	private Data instance = Data.getInstance();
 	private TextView tvView;
 	private EditText editMessage;
+	private String chosenContact;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.msgs);
 
 		tvView = (TextView) findViewById(R.id.msgsHeader);
-		
-		synchronized(instance.contactsWithMsgs) {
-		Intent intent = getIntent();
-		String chosenContact = intent.getStringExtra("chosenContact");
 
-		tvView.setText("Tweets from " + chosenContact);
+		synchronized (instance.contactsWithMsgs) {
+			Intent intent = getIntent();
+			chosenContact = intent.getStringExtra("chosenContact");
 
-		ListView lvMsgs = (ListView) findViewById(R.id.lvMsgs);
+			tvView.setText("Tweets from " + chosenContact);
+
+			ListView lvMsgs = (ListView) findViewById(R.id.lvMsgs);
 
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1,
-				instance.contactsWithMsgs.get(chosenContact));
+					android.R.layout.simple_list_item_1,
+					instance.contactsWithMsgs.get(chosenContact));
 
-		lvMsgs.setAdapter(adapter);
+			lvMsgs.setAdapter(adapter);
 		}
 
 		editMessage = (EditText) findViewById(R.id.editMessage);
@@ -53,9 +54,12 @@ public class MsgsActivity extends Activity {
 		public void onClick(View v) {
 
 			String msg = editMessage.getText().toString();
-
+			
+			editMessage.setText("");
 			if (msg.length() > 0) {
-				new PostTwitt().execute();
+				String screenName = instance.users.get(chosenContact).getScreenName();
+				msg = "@".concat(screenName).concat(" ").concat(msg);
+				new PostTwitt().execute(msg);
 			}
 
 		}

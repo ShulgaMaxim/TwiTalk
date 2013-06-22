@@ -21,24 +21,18 @@ import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.os.AsyncTask;
 import android.util.Log;
 
-
-
 public class PostTwitt extends AsyncTask<String, Void, JSONObject> {
-
 
 	private DefaultHttpClient mClient = new DefaultHttpClient();
 	private OAuthConsumer mConsumer = TwiTalkActivity.getConsumer();
 	private static final String TAG = "GetCredentialsTask";
 
-	// These parameters are needed to talk to the messaging service
-		public HttpParams getParams() {
-			// Tweak further as needed for your app
-			HttpParams params = new BasicHttpParams();
-			// set this to false, or else you'll get an Expectation Failed: error
-			HttpProtocolParams.setUseExpectContinue(params, false);
-			return params;
-		}
-	
+	public HttpParams getParams() {
+		HttpParams params = new BasicHttpParams();
+		HttpProtocolParams.setUseExpectContinue(params, false);
+		return params;
+	}
+
 	@Override
 	protected JSONObject doInBackground(String... params) {
 
@@ -51,8 +45,7 @@ public class PostTwitt extends AsyncTask<String, Void, JSONObject> {
 			post.setEntity(new UrlEncodedFormEntity(out, HTTP.UTF_8));
 			post.setParams(getParams());
 			mConsumer.sign(post);
-			String response = mClient.execute(post,
-					new BasicResponseHandler());
+			String response = mClient.execute(post, new BasicResponseHandler());
 			jso = new JSONObject(response);
 		} catch (Exception e) {
 			Log.e(TAG, "Post Twitt Exception", e);
