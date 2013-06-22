@@ -5,6 +5,7 @@ import ru.usu.twitalk.Data;
 import ru.usu.twitalk.R;
 import ru.usu.twitalk.twitter.GetUserTimeLine;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +20,14 @@ public class ContactsActivity extends Activity {
 
 	protected static final String TAG = "Contacts";
 	private Data instance = Data.getInstance();
+	public static ProgressDialog loadingMessagesDialog;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contacts);
 
+		loadingMessagesDialog = new ProgressDialog(this);
+		
 		TextView tvView = (TextView) findViewById(R.id.contactsHeader);
 
 		if (instance.users.isEmpty()) {

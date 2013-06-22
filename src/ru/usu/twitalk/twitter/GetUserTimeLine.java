@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ru.usu.twitalk.Data;
+import ru.usu.twitalk.activities.ContactsActivity;
 import ru.usu.twitalk.activities.TwiTalkActivity;
 
 import android.net.Uri;
@@ -32,8 +33,8 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPreExecute() {
-		TwiTalkActivity.loadingMessagesDialog.setMessage("Loading messages...");
-		TwiTalkActivity.loadingMessagesDialog.show();
+		ContactsActivity.loadingMessagesDialog.setMessage("Loading messages...");
+		ContactsActivity.loadingMessagesDialog.show();
 		Log.d(TAG, "Waitng");
 	}
 
@@ -63,7 +64,7 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 
 	protected void onPostExecute(Void nada) {
 		Log.d(TAG, "Messages Loaded");
-		TwiTalkActivity.loadingMessagesDialog.dismiss();
+		ContactsActivity.loadingMessagesDialog.dismiss();
 	}
 
 	private void parseTimelineJSONObject(JSONObject object) {

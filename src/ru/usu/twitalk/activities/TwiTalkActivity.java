@@ -29,7 +29,7 @@ public class TwiTalkActivity extends Activity {
 	
 	public static ProgressDialog loadingContactsDialog;
 	public static ProgressDialog loadingUserDataDialog;
-	public static ProgressDialog loadingMessagesDialog;
+	
 
 	private static OAuthConsumer mConsumer = null;
 
@@ -60,7 +60,6 @@ public class TwiTalkActivity extends Activity {
 
 		loadingContactsDialog = new ProgressDialog(this);
 		loadingUserDataDialog = new ProgressDialog(this);
-		loadingMessagesDialog = new ProgressDialog(this);
 	 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
