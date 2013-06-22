@@ -1,7 +1,9 @@
 package ru.usu.twitalk.activities;
 
+import ru.usu.twitalk.App;
 import ru.usu.twitalk.Data;
 import ru.usu.twitalk.R;
+import ru.usu.twitalk.twitter.GetUserTimeLine;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 public class ContactsActivity extends Activity {
 
+	protected static final String TAG = "Contacts";
 	private Data instance = Data.getInstance();
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,12 +43,17 @@ public class ContactsActivity extends Activity {
 						int position, long id) {
 					TextView chosenContact = (TextView) view.findViewById(view
 							.getId());
+					long idContact = instance.users.get(chosenContact.getText().toString()).getId();
+					Log.d(TAG, ""+idContact);
+					
+					new GetUserTimeLine(idContact).execute(App.USER_TIMELINE_URL);
+					
 					Intent intent = new Intent("ru.usu.intent.action.showmsgs");
 					intent.putExtra("chosenContact", chosenContact.getText());
 					Log.d("chosen_contact", chosenContact.getText().toString());
 
 					startActivity(intent);
-
+					
 				}
 			});
 		}

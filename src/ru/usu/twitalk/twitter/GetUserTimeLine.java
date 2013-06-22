@@ -40,6 +40,7 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 	@Override
 	protected Void doInBackground(String... params) {
 		JSONArray array = null;
+		synchronized(instance.contactsWithMsgs) {
 		try {
 			Uri sUri = Uri.parse(params[0]);
 			Uri.Builder builder = sUri.buildUpon();
@@ -57,9 +58,11 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 			Log.e(TAG, "Get Timeline Exception", e);
 		}
 		return null;
+		}
 	}
 
 	protected void onPostExecute(Void nada) {
+		Log.d(TAG, "Messages Loaded");
 		TwiTalkActivity.loadingMessagesDialog.dismiss();
 	}
 
