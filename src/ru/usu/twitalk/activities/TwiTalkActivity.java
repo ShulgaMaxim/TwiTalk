@@ -81,7 +81,7 @@ public class TwiTalkActivity extends Activity {
 				btnLogoutTwitter.setVisibility(View.VISIBLE);
 				btnReload.setVisibility(View.VISIBLE);
 				if (!firstTimeLaunched) {
-					(new GetCredentialsTask(mConsumer)).execute();
+					(new GetCredentialsTask()).execute();
 					firstTimeLaunched = true;
 				}
 				
@@ -117,7 +117,7 @@ public class TwiTalkActivity extends Activity {
 
 		instance.infAbOAuthUser.clear();
 		instance.friends.clear();
-		instance.infAbFriends.clear();
+		instance.users.clear();
 		instance.contactsWithMsgs.clear();
 		
 	}
@@ -142,7 +142,7 @@ public class TwiTalkActivity extends Activity {
 
 		@Override
 		public void onClick(View arg0) {
-			(new GetCredentialsTask(mConsumer)).execute();
+			(new GetCredentialsTask()).execute();
 		}
 		
 	}

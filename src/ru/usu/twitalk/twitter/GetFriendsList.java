@@ -22,7 +22,6 @@ public class GetFriendsList extends AsyncTask<String, Void, Void> {
 	private DefaultHttpClient mClient = new DefaultHttpClient();
 	private OAuthConsumer mConsumer = TwiTalkActivity.getConsumer();
 
-
 	@Override
 	protected void onPreExecute() {
 		TwiTalkActivity.loadingContactsDialog.setMessage("Loading contacts...");
@@ -54,24 +53,32 @@ public class GetFriendsList extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void nada) {
-		for (String name : instance.infAbFriends.keySet()) {
-			long id = instance.infAbFriends.get(name);
-			Log.d(TAG, name + " " + id);
-			new GetUserTimeLine(id)
-					.execute(App.USER_TIMELINE_URL);
+		for (User usr : instance.users) {
+			long id = usr.getId();
+			Log.d(TAG, usr.getName() + " " + id);
+			new GetUserTimeLine(id).execute(App.USER_TIMELINE_URL);
 		}
 		TwiTalkActivity.loadingContactsDialog.dismiss();
 	}
 
 	private void parseTimelineJSONObject(JSONObject object) throws Exception {
-
-		String name = object.getString("name");
-		long id = object.getLong("id_str");
-		if (instance.friends.contains(name)
-				&& instance.infAbFriends.containsKey(name))
+		String name;
+		long id;
+		String screen_name;
+		User user;
+		try {
+			name = object.getString("name");
+			id = object.getLong("id_str");
+			screen_name = object.getString("screen_name");
+			user = new User(name, id, screen_name);
+		} catch (Exception e) {
+			Log.e(TAG, "Can't take info from JSON");
+			return;
+		}
+		if (instance.friends.contains(name) && instance.users.contains(user))
 			return;
 		instance.friends.add(name);
-		instance.infAbFriends.put(name, id);
+		instance.users.add(user);
 
 	}
 }
