@@ -27,7 +27,7 @@ public class MsgsActivity extends Activity {
 
 		tvView = (TextView) findViewById(R.id.msgsHeader);
 
-		synchronized (instance.contactsWithMsgs) {
+		synchronized (instance.users) {
 			Intent intent = getIntent();
 			chosenContact = intent.getStringExtra("chosenContact");
 
@@ -37,7 +37,7 @@ public class MsgsActivity extends Activity {
 
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 					android.R.layout.simple_list_item_1,
-					instance.contactsWithMsgs.get(chosenContact));
+					instance.users.get(chosenContact).getMsgs());
 
 			lvMsgs.setAdapter(adapter);
 		}

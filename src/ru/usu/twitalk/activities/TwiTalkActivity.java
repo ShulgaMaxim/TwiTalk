@@ -116,7 +116,7 @@ public class TwiTalkActivity extends Activity {
 
 		instance.infAbOAuthUser.clear();
 		instance.users.clear();
-		instance.contactsWithMsgs.clear();
+//		instance.contactsWithMsgs.clear();
 		
 	}
 

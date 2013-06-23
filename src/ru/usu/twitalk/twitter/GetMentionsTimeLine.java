@@ -30,7 +30,7 @@ public class GetMentionsTimeLine extends AsyncTask<String, Void, Void> {
 	@Override
 	protected Void doInBackground(String... params) {
 		JSONArray array = null;
-		synchronized (instance.contactsWithMsgs) {
+		synchronized (instance.users) {
 			try {
 				Uri sUri = Uri.parse(params[0]);
 				Uri.Builder builder = sUri.buildUpon();

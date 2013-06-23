@@ -42,7 +42,7 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 	@Override
 	protected Void doInBackground(String... params) {
 		JSONArray array = null;
-		synchronized (instance.contactsWithMsgs) {
+		synchronized (instance.users) {
 			try {
 				Uri sUri = Uri.parse(params[0]);
 				Uri.Builder builder = sUri.buildUpon();
@@ -71,21 +71,25 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 
 	private void parseTimelineJSONObject(JSONObject object) {
 		JSONObject user;
-		ArrayList<String> list;
+//		ArrayList<String> list;
 		try {
 			user = object.getJSONObject("user");
 			String name = user.getString("name");
 			String msg = object.getString("text");
-			if (instance.contactsWithMsgs.containsKey(name))
-				if (!instance.contactsWithMsgs.get(name).contains(msg))
-					list = instance.contactsWithMsgs.get(name);
-				else
-					return;
-			else
-				list = new ArrayList<String>();
-
-			list.add(msg);
-			instance.contactsWithMsgs.put(name, list);
+			
+			if (instance.users.containsKey(name)) {
+				instance.users.get(name).addMsg(msg);
+			}
+//			if (instance.contactsWithMsgs.containsKey(name))
+//				if (!instance.contactsWithMsgs.get(name).contains(msg))
+//					list = instance.contactsWithMsgs.get(name);
+//				else
+//					return;
+//			else
+//				list = new ArrayList<String>();
+//
+//			list.add(msg);
+//			instance.contactsWithMsgs.put(name, list);
 			Log.d(TAG, name + " " + msg);
 		} catch (JSONException e) {
 			Log.e(TAG, "Couldn't take user data", e);

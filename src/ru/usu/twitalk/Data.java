@@ -1,6 +1,5 @@
 package ru.usu.twitalk;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +9,11 @@ public class Data {
 
 	private static Data instance;
 
-	//info about frends
+	// info about frends
 	public Map<String, User> users;
-	//info about OAuth user
+	// info about OAuth user
 	public Map<String, String> infAbOAuthUser;
-	public Map<String, ArrayList<String>> contactsWithMsgs;
+	// public Map<String, ArrayList<String>> contactsWithMsgs;
 
 	public static final String USER_NAME = "name";
 	public static final String USER_SCREEN_NAME = "screen_name";
@@ -28,8 +27,8 @@ public class Data {
 
 	private Data() {
 		users = new HashMap<String, User>();
-		contactsWithMsgs = new HashMap<String, ArrayList<String>>();
+		// contactsWithMsgs = new HashMap<String, ArrayList<String>>();
 		infAbOAuthUser = new HashMap<String, String>();
 	}
 
-}	
+}
