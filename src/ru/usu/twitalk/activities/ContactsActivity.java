@@ -3,7 +3,7 @@ package ru.usu.twitalk.activities;
 import ru.usu.twitalk.App;
 import ru.usu.twitalk.Data;
 import ru.usu.twitalk.R;
-import ru.usu.twitalk.twitter.GetUserTimeLine;
+import ru.usu.twitalk.twitter.GetMentionsTimeLine;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -47,10 +47,12 @@ public class ContactsActivity extends Activity {
 						int position, long id) {
 					TextView chosenContact = (TextView) view.findViewById(view
 							.getId());
-					long idContact = instance.users.get(chosenContact.getText().toString()).getId();
-					Log.d(TAG, ""+idContact);
+
+//					long idContact = instance.users.get(chosenContact.getText().toString()).getId();
+//					Log.d(TAG, ""+idContact);
 					
-					new GetUserTimeLine(idContact).execute(App.USER_TIMELINE_URL);
+//					new GetUserTimeLine(idContact).execute(App.USER_TIMELINE_URL);
+					new GetMentionsTimeLine().execute(App.MENTIONS_TIMELINE_URL);
 					
 					Intent intent = new Intent("ru.usu.intent.action.showmsgs");
 					intent.putExtra("chosenContact", chosenContact.getText());

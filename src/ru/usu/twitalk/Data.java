@@ -13,7 +13,6 @@ public class Data {
 	public Map<String, User> users;
 	// info about OAuth user
 	public Map<String, String> infAbOAuthUser;
-	// public Map<String, ArrayList<String>> contactsWithMsgs;
 
 	public static final String USER_NAME = "name";
 	public static final String USER_SCREEN_NAME = "screen_name";

@@ -1,7 +1,5 @@
 package ru.usu.twitalk.twitter;
 
-import java.util.ArrayList;
-
 import oauth.signpost.OAuthConsumer;
 
 import org.apache.http.client.methods.HttpGet;
@@ -14,7 +12,6 @@ import org.json.JSONObject;
 import ru.usu.twitalk.Data;
 import ru.usu.twitalk.activities.ContactsActivity;
 import ru.usu.twitalk.activities.TwiTalkActivity;
-
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -71,7 +68,6 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 
 	private void parseTimelineJSONObject(JSONObject object) {
 		JSONObject user;
-//		ArrayList<String> list;
 		try {
 			user = object.getJSONObject("user");
 			String name = user.getString("name");
@@ -80,16 +76,7 @@ public class GetUserTimeLine extends AsyncTask<String, Void, Void> {
 			if (instance.users.containsKey(name)) {
 				instance.users.get(name).addMsg(msg);
 			}
-//			if (instance.contactsWithMsgs.containsKey(name))
-//				if (!instance.contactsWithMsgs.get(name).contains(msg))
-//					list = instance.contactsWithMsgs.get(name);
-//				else
-//					return;
-//			else
-//				list = new ArrayList<String>();
-//
-//			list.add(msg);
-//			instance.contactsWithMsgs.put(name, list);
+
 			Log.d(TAG, name + " " + msg);
 		} catch (JSONException e) {
 			Log.e(TAG, "Couldn't take user data", e);

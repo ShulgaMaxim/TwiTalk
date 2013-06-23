@@ -21,6 +21,7 @@ public class GetMentionsTimeLine extends AsyncTask<String, Void, Void> {
 	private OAuthConsumer mConsumer = TwiTalkActivity.getConsumer();
 	private DefaultHttpClient mClient = new DefaultHttpClient();
 	private Data instance = Data.getInstance();
+	
 
 	@Override
 	protected void onPreExecute() {
@@ -59,6 +60,11 @@ public class GetMentionsTimeLine extends AsyncTask<String, Void, Void> {
 			user = object.getJSONObject("user");
 			String name = user.getString("name");
 			String text = object.getString("text");
+			
+			if (instance.users.containsKey(name)) {
+				instance.users.get(name).addMsg(text);
+			}
+			
 			Log.d(TAG, name + " " + text);
 		} catch (JSONException e1) {
 			Log.e(TAG, "JSON exception");
