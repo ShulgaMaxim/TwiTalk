@@ -26,7 +26,6 @@ public class Data {
 
 	private Data() {
 		users = new HashMap<String, User>();
-		// contactsWithMsgs = new HashMap<String, ArrayList<String>>();
 		infAbOAuthUser = new HashMap<String, String>();
 	}
 

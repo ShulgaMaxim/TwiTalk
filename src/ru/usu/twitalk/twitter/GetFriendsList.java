@@ -53,7 +53,7 @@ public class GetFriendsList extends AsyncTask<String, Void, Void> {
 	@Override
 	protected void onPostExecute(Void nada) {
 
-		// new TestSearchTwitts().execute(App.SEARCH_TWITTS_URL);
+		// new SearchTwittsFromOauthUser("Roman Shmatov").execute(App.SEARCH_TWITTS_URL);
 		// new GetMentionsTimeLine().execute(App.MENTIONS_TIMELINE_URL);
 
 		TwiTalkActivity.loadingContactsDialog.dismiss();
