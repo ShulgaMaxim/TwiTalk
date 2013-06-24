@@ -52,7 +52,7 @@ public class ContactsActivity extends Activity {
 
 					String destinationUser = chosenContact.getText().toString();
 
-					Log.e(TAG, destinationUser);
+					Log.d(TAG, destinationUser);
 					new GetMentionsTimeLine()
 							.execute(App.MENTIONS_TIMELINE_URL);
 

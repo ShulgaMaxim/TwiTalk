@@ -17,6 +17,7 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
 import ru.usu.twitalk.App;
+import ru.usu.twitalk.activities.MsgsActivity;
 import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -25,12 +26,19 @@ public class PostTwitt extends AsyncTask<String, Void, JSONObject> {
 
 	private DefaultHttpClient mClient = new DefaultHttpClient();
 	private OAuthConsumer mConsumer = TwiTalkActivity.getConsumer();
-	private static final String TAG = "GetCredentialsTask";
+	private static final String TAG = "PostTwitt";
 
 	public HttpParams getParams() {
 		HttpParams params = new BasicHttpParams();
 		HttpProtocolParams.setUseExpectContinue(params, false);
 		return params;
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		MsgsActivity.sendingMessageDialog.setMessage("Sending message...");
+		MsgsActivity.sendingMessageDialog.show();
+		Log.d(TAG, "Waitng");
 	}
 
 	@Override
@@ -53,4 +61,8 @@ public class PostTwitt extends AsyncTask<String, Void, JSONObject> {
 		return jso;
 	}
 
+	protected void onPostExecute(JSONObject result) {
+		Log.d("chosen_contact", MsgsActivity.chosenContact);
+		MsgsActivity.sendingMessageDialog.dismiss();
+	}
 }

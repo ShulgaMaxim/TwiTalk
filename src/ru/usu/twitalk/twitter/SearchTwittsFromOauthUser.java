@@ -25,6 +25,11 @@ public class SearchTwittsFromOauthUser extends AsyncTask<String, Void, Void> {
 	public SearchTwittsFromOauthUser(String destinationUser) {
 		this.destinationUser = destinationUser;
 	}
+	
+	@Override
+	protected void onPreExecute() {
+		Log.d(TAG, "Waitng");
+	}
 
 	@Override
 	protected Void doInBackground(String... params) {
@@ -59,6 +64,9 @@ public class SearchTwittsFromOauthUser extends AsyncTask<String, Void, Void> {
 			}
 			return null;
 		}
+	}
+	
+	protected void onPostExecute(Void nada) {
 	}
 
 	private void parseSearchTwittsJSONObject(JSONObject object)

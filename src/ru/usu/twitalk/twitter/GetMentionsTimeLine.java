@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ru.usu.twitalk.Data;
+import ru.usu.twitalk.activities.ContactsActivity;
 import ru.usu.twitalk.activities.TwiTalkActivity;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -25,6 +26,8 @@ public class GetMentionsTimeLine extends AsyncTask<String, Void, Void> {
 
 	@Override
 	protected void onPreExecute() {
+		ContactsActivity.loadingMessagesDialog.setMessage("Loading messagess...");
+		ContactsActivity.loadingMessagesDialog.show();
 		Log.d(TAG, "Waitng");
 	}
 
@@ -52,6 +55,7 @@ public class GetMentionsTimeLine extends AsyncTask<String, Void, Void> {
 	}
 
 	protected void onPostExecute(Void nada) {
+		ContactsActivity.loadingMessagesDialog.dismiss();
 	}
 
 	private void parseTimelineJSONObject(JSONObject object) {
