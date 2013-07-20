@@ -43,31 +43,38 @@ public class ContactsActivity extends Activity {
 
 			lvContacts.setAdapter(adapter);
 
-			lvContacts.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-
-					TextView chosenContact = (TextView) view.findViewById(view
-							.getId());
-
-					String destinationUser = chosenContact.getText().toString();
-
-					Log.d(TAG, destinationUser);
-					new GetMentionsTimeLine()
-							.execute(App.MENTIONS_TIMELINE_URL);
-
-					new SearchTwittsFromOauthUser(destinationUser)
-							.execute(App.SEARCH_TWITTS_URL);
-
-					Intent intent = new Intent("ru.usu.intent.action.showmsgs");
-					intent.putExtra("chosenContact", chosenContact.getText());
-					Log.d("chosen_contact", chosenContact.getText().toString());
-
-					startActivity(intent);
-
-				}
-			});
+			lvContacts.setOnItemClickListener(new OnContactClickListener());
 		}
 
+	}
+	
+	class OnContactClickListener implements OnItemClickListener {
+		
+		public void onItemClick(AdapterView<?> parent, View view,
+				int position, long id) {
+
+			TextView chosenContact = (TextView) view.findViewById(view.getId());
+
+			String destinationUser = chosenContact.getText().toString();
+
+			Log.d(TAG, destinationUser);
+			
+			loadingMessages(destinationUser);
+
+			Intent intent = new Intent("ru.usu.intent.action.showmsgs");
+			intent.putExtra("chosenContact", chosenContact.getText());
+			Log.d("chosen_contact", chosenContact.getText().toString());
+
+			startActivity(intent);
+			
+		}
+		
+		private void loadingMessages(String destinationUser) {
+			
+			new GetMentionsTimeLine().execute(App.MENTIONS_TIMELINE_URL);
+
+			new SearchTwittsFromOauthUser(destinationUser).execute(App.SEARCH_TWITTS_URL);
+
+		}
 	}
 }

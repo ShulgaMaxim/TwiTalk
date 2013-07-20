@@ -43,7 +43,7 @@ public class SearchTwittsFromOauthUser extends AsyncTask<String, Void, Void> {
 						.concat(" @")
 						.concat(instance.users.get(destinationUser)
 								.getScreenName());
-				Log.e(TAG, searchParametr);
+				Log.d(TAG, searchParametr);
 				Uri sUri = Uri.parse(params[0]);
 				Uri.Builder builder = sUri.buildUpon();
 				builder.appendQueryParameter("q", searchParametr);
