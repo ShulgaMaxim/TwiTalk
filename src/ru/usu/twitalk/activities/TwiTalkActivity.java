@@ -115,9 +115,7 @@ public class TwiTalkActivity extends Activity {
 	private void clearData() {
 
 		instance.infAbOAuthUser.clear();
-		instance.users.clear();
-//		instance.contactsWithMsgs.clear();
-		
+		instance.users.clear();	
 	}
 
 	class FriendsButtonClickedListener implements OnClickListener {

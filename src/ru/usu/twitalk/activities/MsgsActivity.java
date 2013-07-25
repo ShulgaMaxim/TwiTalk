@@ -2,7 +2,9 @@ package ru.usu.twitalk.activities;
 
 import ru.usu.twitalk.Data;
 import ru.usu.twitalk.R;
+import ru.usu.twitalk.twitter.GetMentionsTimeLine;
 import ru.usu.twitalk.twitter.PostTwitt;
+import ru.usu.twitalk.twitter.SearchTwittsFromOauthUser;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,12 +19,13 @@ import android.widget.TextView;
 
 public class MsgsActivity extends Activity {
 
-	private Data instance = Data.getInstance();
+	private Data instanceData = Data.getInstance();
 	private TextView tvView;
 	private EditText editMessage;
+	private ListView lvMsgs;
+	private ArrayAdapter<String> messagesAdapter;
 	public static String chosenContact;
 	public static ProgressDialog sendingMessageDialog;
-	public ListView lvMsgs;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,7 +35,7 @@ public class MsgsActivity extends Activity {
 
 		tvView = (TextView) findViewById(R.id.msgsHeader);
 
-		synchronized (instance.users) {
+		synchronized (instanceData.users) {
 			Intent intent = getIntent();
 			chosenContact = intent.getStringExtra("chosenContact");
 
@@ -40,11 +43,11 @@ public class MsgsActivity extends Activity {
 
 			lvMsgs = (ListView) findViewById(R.id.lvMsgs);
 
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+			messagesAdapter = new ArrayAdapter<String>(this,
 					android.R.layout.simple_list_item_1,
-					instance.users.get(chosenContact).getMsgs());
+					instanceData.users.get(chosenContact).getMsgs());
 
-			lvMsgs.setAdapter(adapter);
+			lvMsgs.setAdapter(messagesAdapter);
 		}
 
 		editMessage = (EditText) findViewById(R.id.editMessage);
@@ -62,11 +65,17 @@ public class MsgsActivity extends Activity {
 			
 			editMessage.setText("");
 			if (msg.length() > 0) {
-				String screenName = instance.users.get(chosenContact).getScreenName();
+				String screenName = instanceData.users.get(chosenContact).getScreenName();
 				msg = "@".concat(screenName).concat(" ").concat(msg);
 				PostTwitt pt = new PostTwitt();
 				pt.execute(msg);
 			}
+			
+			new GetMentionsTimeLine().execute();
+			new SearchTwittsFromOauthUser(chosenContact).execute();
+			
+			messagesAdapter.add(msg);
+			
 		}
 	}
 }
